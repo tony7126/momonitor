@@ -8,6 +8,11 @@ from momonitor.main.constants import (STATUS_UNKNOWN,
                                       ALERT_CHOICES,
                                       STATUS_BAD)
 import requests
+from smtplib import SMTPException
+from django.template import Context
+from django.template.loader import get_template
+from django.core.mail import send_mail
+import settings
 
 class Service(BaseModel):
     class Meta:
@@ -82,18 +87,18 @@ class Service(BaseModel):
                          "service_name":self.name,
                          "url":"%s%s" % (settings.DOMAIN,
                                          reverse("main:service",kwargs={'service_id':self.id}))
-                         if settings.hasattr("DOMAIN") and settings.DOMAIN  else ""
+                         if settings.DOMAIN else ""
                              
                          })
                 )
-                    
             send_mail("MOMONITOR EVENT TRIGGERED",
                       email_msg,
-                      settings.SERVER_EMAIL,
+                      settings.EMAIL_HOST_USER,
                       [self.email_contact,],
                       fail_silently=False)
         except SMTPException:
             logging.error("Failed to send email to %s for error %s" % (self.email_contact,description))
+        print "here"
 
     def send_alert(self,description,alert_type=None):
         if self.silenced:

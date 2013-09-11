@@ -125,14 +125,19 @@ DEBUG=True
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'momonitordemo',
-        'USER': 'postgres',
-        'PASSWORD': '',
+        'NAME': 'lyfe_db',
+        'USER': 'lyfe',
+        'PASSWORD': 'pot',
         'HOST': 'localhost',
         'PORT': '5432',
     }
 }
 
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'support@lyfemobile.com'
+EMAIL_HOST_PASSWORD = 'Zeus-ernie'
+EMAIL_PORT = 587
 CHECK_MODELS = []
 
 if IS_TESTING:
@@ -148,7 +153,7 @@ else:
     #If you are using external service, set their endpoints above
     UMPIRE_ENDPOINT = ""
     SENSU_API_ENDPOINT = ""
-    GRAPHITE_ENDPOINT = ""
+    GRAPHITE_ENDPOINT = "http://107.20.140.167"
 
 #OAuth rule. Only allow people with a google email ending in 'example.org' to access the site
 GOOGLE_WHITE_LISTED_DOMAINS = ['gmail.com']

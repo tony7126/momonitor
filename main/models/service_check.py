@@ -40,17 +40,15 @@ class ServiceCheck(BaseModel):
     def set_state(self,status,last_value,extra={}):
         num_failures = self.num_failures+1 if status==STATUS_BAD else 0
         last_updated = self.last_updated if status==STATUS_UNKNOWN else time.time()
-
         if num_failures>=(self.failures_before_alert or self.service.failures_before_alert):
             self.send_alert(self.alert_type or self.service.alert_type)
-
         state = {'status':status,
                  'last_updated':last_updated,
                  'last_value':last_value,
                  'num_failures':num_failures}
 
         state.update(extra)
-
+        print state
         cache.set(self._redis_key,json.dumps(state),timeout=0)
 
     @property

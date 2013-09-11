@@ -87,7 +87,7 @@ def modal_form(request,resource_name,resource_id=None):
                               RequestContext(request))
 
 
-@ajax_required
+#@ajax_required
 @login_required
 def refresh(request,resource_name,resource_id):
     '''Run a specific check.'''

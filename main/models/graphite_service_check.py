@@ -55,6 +55,7 @@ class GraphiteServiceCheck(ServiceCheck):
         data = res.text.split("|")
         data_values = data[1].split(",")
         average_value = sum([float(d) for d in data_values])/len(data_values)
+        print average_value
 
         if self.graphite_lower_bound <= average_value and \
                 self.graphite_upper_bound >= average_value:
