@@ -127,7 +127,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'lyfe_db',
         'USER': 'lyfe',
-        'PASSWORD': 'pot',
+        'PASSWORD': 'lyfe_rtb',
         'HOST': 'localhost',
         'PORT': '5432',
     }
