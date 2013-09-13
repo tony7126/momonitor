@@ -7,7 +7,7 @@
 ####
 # Section 1. Django Defaults. Don't worry about these. Configurable settings in Section 2
 ####
-
+ALLOWED_HOSTS = []
 TIME_ZONE = 'America/Chicago'
 LANGUAGE_CODE = 'en-us'
 SITE_ID = 1
@@ -18,7 +18,6 @@ USE_L10N = True
 import os
 dir_path = os.path.normpath(os.path.dirname(os.path.abspath(__file__)))
 MEDIA_ROOT = '%s/media/' % dir_path
-
 #URLs. Probably want to serve these via a static http server, but here for DEBUG=True situations
 MEDIA_URL = '/media/'
 STATIC_URL = '/static/'
@@ -40,7 +39,6 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'breadcrumbs.middleware.BreadcrumbsMiddleware',
 )
-
 ROOT_URLCONF = 'momonitor.urls'
 
 INSTALLED_APPS = (
