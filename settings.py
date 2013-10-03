@@ -5,6 +5,7 @@
 #################
 import sys
 sys.path.insert(0, "/home/tony/work/rtb/")
+sys.path.insert(0, "../")
 ####
 # Section 1. Django Defaults. Don't worry about these. Configurable settings in Section 2
 ####
