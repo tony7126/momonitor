@@ -11,6 +11,7 @@ from momonitor.main.models import (RESOURCE_NAME_MAP,
 
 from momonitor.common.decorators import ajax_required
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import authenticate, login
 from momonitor.main.forms import RESOURCE_FORM_MAP
 from momonitor.main.forms.utils import generate_check_modelform_cls
 
@@ -19,7 +20,13 @@ from momonitor.main.constants import (STATUS_GOOD,
                                       STATUS_WARNING,
                                       STATUS_UNKNOWN)
 
-
+def login_view(request):
+  user = authenticate(username = "tony", password = "p")
+  if user is not None:
+    login(request, user)
+  else:
+    return HttpResponse("bad password")
+  return redirect(request.GET["next"])
 
 @login_required
 def index(request):

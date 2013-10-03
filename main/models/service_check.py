@@ -48,7 +48,6 @@ class ServiceCheck(BaseModel):
                  'num_failures':num_failures}
 
         state.update(extra)
-        print state
         cache.set(self._redis_key,json.dumps(state),timeout=0)
 
     @property

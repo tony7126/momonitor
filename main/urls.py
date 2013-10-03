@@ -6,7 +6,6 @@ urlpatterns = patterns('momonitor.main.views',
                        url('^service/(?P<service_id>.*)/$','service',name="service"),                       
                        url('^refresh/(?P<resource_name>.*)/(?P<resource_id>.*)/$','refresh',name="refresh"),
                        url('^silence/(?P<resource_name>.*)/(?P<resource_id>.*)/$','silence',name="silence"),
-                       url('^how-it-works/$','how_it_works',name="how_it_works"),
 
                        #CRUD FORMS
                        url('^modal/form/(?P<resource_name>.*)/(?P<resource_id>.*)/$','modal_form',name="modal_form"),
@@ -20,6 +19,8 @@ urlpatterns = patterns('momonitor.main.views',
                        url('^sensu-check-info/(?P<sensu_check_id>.*)/$','sensu_check_info',name="sensu_check_info"),
 
 
-                       (r'^api/', include(v1_api.urls))
+                       (r'^api/', include(v1_api.urls)),
+                       url('login', "login_view", name = 'login'),
+
 )
 
