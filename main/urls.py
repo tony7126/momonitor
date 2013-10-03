@@ -20,7 +20,6 @@ urlpatterns = patterns('momonitor.main.views',
 
 
                        (r'^api/', include(v1_api.urls)),
-                       url('login', "login_view", name = 'login'),
 
 )
 

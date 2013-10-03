@@ -1,0 +1,20 @@
+{% extends "main/base.html" %}
+{% load momonitor_tags %}
+{% block body %}
+    <div class = "row" style="text-align: center; margin-top: 100px; margin-left:auto;margin-right:auto;">
+        <div class = "well span4" style="float:none; margin-left: auto;margin-right: auto">
+            <form id = "loginForm" method="post" action = ".">
+                {% csrf_token %}
+                <label>Username</label><input name="username" id="username" type = "text"/>
+                <label>Password</label><input name="password" id="password" type = "password"/>
+                <input value = "{{redirect}}" name="redirect" id="redirect" type = "hidden"/><br>
+                <button class = "btn btn-primary" type="submit">Login</button>
+            </form>
+            <p>
+                {{error}}
+            </p>
+            <a href = "#">Register</a> / <a href = "#">Forgot password?</a>
+        </div>
+
+    </div>
+{% endblock %}

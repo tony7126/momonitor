@@ -3,7 +3,8 @@
 ## Momonitor Django Settings
 ##
 #################
-
+import sys
+sys.path.insert(0, "/home/tony/work/rtb/")
 ####
 # Section 1. Django Defaults. Don't worry about these. Configurable settings in Section 2
 ####
@@ -51,10 +52,9 @@ INSTALLED_APPS = (
     'south',
     'main',
     'common',
-    'slideshow',
     'mobile',
     'breadcrumbs',
-    'social_auth'
+    'auth'
 )
 
 #Redis Cache required to keep application state.
@@ -99,15 +99,15 @@ LOGGING = {
 
 #This is the global endpoint that pagerduty uses for custom events.
 PAGERDUTY_ENDPOINT = "https://events.pagerduty.com/generic/2010-04-15/create_event.json"
-LOGIN_URL = '/social_auth/login/google/'
+LOGIN_URL = '/auth/login/'
 
 #Add media to the python path so that we can run code checks in the media/uploaded_scripts directory
 import sys
 sys.path.insert(0,os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)) ,'media')))
 
 AUTHENTICATION_BACKENDS = (
-    'social_auth.backends.google.GoogleBackend',
-    'django.contrib.auth.backends.ModelBackend'
+    'momonitor.auth.MomoBackend.MomoBackend',
+    'django.contrib.auth.backends.ModelBackend',
 )
 
 FAKE_APP_PORT = 5000
@@ -119,17 +119,28 @@ IS_TESTING = sys.argv[1:2] == ['test']
 ####
 
 DEBUG=True
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'lyfe_db',
-        'USER': 'lyfe',
-        'PASSWORD': 'lyfe_rtb',
-        'HOST': 'localhost',
-        'PORT': '5432',
+if 0:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': 'lyfe_db',
+            'USER': 'lyfe',
+            'PASSWORD': 'lyfe_rtb',
+            'HOST': 'localhost',
+            'PORT': '5432',
+        }
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': 'lyfe_db',
+            'USER': 'lyfe',
+            'PASSWORD': 'lyfe_rtb',
+            'HOST': 'localhost',
+            'PORT': '5432',
+        }
+    }
 
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
@@ -151,7 +162,7 @@ else:
     #If you are using external service, set their endpoints above
     UMPIRE_ENDPOINT = ""
     SENSU_API_ENDPOINT = ""
-    GRAPHITE_ENDPOINT = "http://107.20.140.167"
+    GRAPHITE_ENDPOINT = "http://carbon-monitor.lyfemobile.net"
 
 #OAuth rule. Only allow people with a google email ending in 'example.org' to access the site
 GOOGLE_WHITE_LISTED_DOMAINS = ['gmail.com']
