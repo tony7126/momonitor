@@ -9,3 +9,4 @@ docs/_build
 media/*
 test_settings.py
 \.DS_STORE
+lyfe_db
