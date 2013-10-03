@@ -2,7 +2,11 @@ from django.contrib.auth.models import User, check_password
 
 class MomoBackend(object):
 	def authenticate(self, username = None, password = None):
-		user = User.objects.get(username = username)
+		try:
+			user = User.objects.get(username = username)
+		except User.DoesNotExist:
+			return None
+			
 		pwd_valid = check_password(password, user.password)
 		if pwd_valid:
 			return user
