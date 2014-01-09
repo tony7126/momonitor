@@ -162,7 +162,7 @@ if IS_TESTING:
 else:
     #If you are using external service, set their endpoints above
     UMPIRE_ENDPOINT = ""
-    SENSU_API_ENDPOINT = ""
+    SENSU_API_ENDPOINT = "http://sensu-monitor.lyfemobile.net"
     GRAPHITE_ENDPOINT = "http://carbon-monitor.lyfemobile.net"
 
 #OAuth rule. Only allow people with a google email ending in 'example.org' to access the site
