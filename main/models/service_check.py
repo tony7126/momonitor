@@ -32,10 +32,11 @@ class ServiceCheck(BaseModel):
         return "%s:::%s" % (self.resource_name,self.id)
 
     def _get_state(self):
-        #try:
-        return json.loads(cache.get(self._redis_key))
-        #except Exception:
-        #   return {}
+        try:
+            return json.loads(cache.get(self._redis_key))
+        except Exception as inst:
+            print inst
+            return {}
 
     def set_state(self,status,last_value,extra={}):
         num_failures = self.num_failures+1 if status==STATUS_BAD else 0
