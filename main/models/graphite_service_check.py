@@ -26,6 +26,10 @@ class GraphiteServiceCheck(ServiceCheck):
     def graphite_url(self):
         return "%s/render/?min=0&width=570&height=350&from=-3h&target=%s" % (settings.GRAPHITE_ENDPOINT,self.graphite_metric)
 
+    @property
+    def metric(self):
+        return self.graphite_metric
+
     def update_status(self):
         value = None
         status = STATUS_UNKNOWN
