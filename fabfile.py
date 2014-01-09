@@ -25,4 +25,12 @@ def setup_mo_repo():
 def deploy_mo():
     env.user = "ubuntu"
     with cd("momo/momonitor"):
-        run("git pull origin master")    
+        run("git pull origin master")
+
+@hosts(['mongo-backup.lyfemobile.net'])
+def reload_uwsgi():
+    with cd("momo/momonitor"):
+        run("source ../bin/activate && uwsgi --reload /tmp/momo.pid")
+@hosts(["localhost"])
+def git_push():
+    local("git push origin master")
