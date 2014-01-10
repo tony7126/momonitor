@@ -34,8 +34,7 @@ class ServiceCheck(BaseModel):
     def _get_state(self):
         try:
             return json.loads(cache.get(self._redis_key))
-        except Exception as inst:
-            print inst
+        except:
             return {}
 
     def set_state(self,status,last_value,extra={}):

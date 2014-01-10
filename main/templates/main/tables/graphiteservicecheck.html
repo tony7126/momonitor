@@ -38,9 +38,9 @@
       <!--<td width="15%">{% if check.timeout %}{{check.timeout}}{% else %}n/a{% endif %}</td>-->
       <td width="15%">{{check.graphite_upper_bound}}</td>
       <td width="10%">{{check.last_updated|since}}
-	<a class="ajaxify" href="{% url main:refresh check_cls.resource_name check.id %}">
-	  <i class="icon-refresh"></i>
-	</a>
+      	<a class="ajaxify" href="{% url main:refresh check_cls.resource_name check.id %}">
+      	  <i class="icon-refresh"></i>
+      	</a>
       </td>
     </tr>
     {% endfor %}

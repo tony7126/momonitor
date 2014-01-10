@@ -34,7 +34,6 @@ class GraphiteServiceCheck(ServiceCheck):
         value = None
         status = STATUS_UNKNOWN
 
-        
         try:
             res = requests.get("%s/render/?target=%s&from=-%ss&rawData=true" % (
                     settings.GRAPHITE_ENDPOINT,
@@ -55,17 +54,13 @@ class GraphiteServiceCheck(ServiceCheck):
         except Exception:
             self.set_state(status=STATUS_UNKNOWN,last_value="Something went wrong")
             return
-
+       
         data = res.text.split("|")
         data_values = data[1].split(",")
-        average_value = sum([float(d) for d in data_values])/len(data_values)
-        print average_value
-
+        average_value = sum([float(d) for d in data_values if not d.startswith("None")])/len(data_values)
         if self.graphite_lower_bound <= average_value and \
                 self.graphite_upper_bound >= average_value:
             status = STATUS_GOOD
         else:
             status = STATUS_BAD
-
-
         self.set_state(status=status,last_value=average_value)

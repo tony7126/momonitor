@@ -8,7 +8,6 @@ import logging
 import croniter
 import time
 
-
 class Command(BaseCommand):
     '''Call update_status on all checks for all services'''
     def handle(self, *args, **options):        
@@ -20,10 +19,11 @@ class Command(BaseCommand):
                     if croniter.croniter(check.frequency or check.service.frequency,
                                          now).get_next()-now<=60:
                         logging.debug("Cron matched. running check %s" % check.name)
+                        #check.update_status()
                         pool.spawn(check.update_status)
                     else:
                         logging.debug("Cron didn't match. not running check %s" % check.name)
-            except:
+            except Exception:
                 logging.error("Failed to parse cron on check %s" % check.name)
                 continue
 
