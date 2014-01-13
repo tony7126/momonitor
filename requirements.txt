@@ -25,3 +25,4 @@ wsgiref==0.1.2
 zope.interface==4.0.3
 pymongo==2.6.3
 fabric==1.8.1
+boto==2.9.8
