@@ -91,7 +91,7 @@ class Service(BaseModel):
                              
                          })
                 )
-            send_mail("MOMONITOR EVENT TRIGGERED",
+            send_mail("LYFE EVENT TRIGGERED",
                       email_msg,
                       settings.EMAIL_HOST_USER,
                       [self.email_contact,],

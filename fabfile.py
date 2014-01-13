@@ -25,6 +25,7 @@ def setup_mo_repo():
 def deploy_mo():
     env.user = "ubuntu"
     with cd("momo/momonitor"):
+        run("source ../bin/activate && pip install -r requirements.txt")
         run("git pull origin master")
 
 @hosts(['mongo-backup.lyfemobile.net'])
